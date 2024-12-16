@@ -1,0 +1,496 @@
+/* Общие стили для контейнера */
+.container {
+    margin: 0 100px 0 100px;
+  }
+  
+  /* Стили для шапки */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border-bottom: 1px solid blue;
+  }
+  
+  .iconHeader {
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .controlPanel {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btnIconControlPanel {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .btnIconControlPanel:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Стили для регистрации */
+  .Registration {
+    width: 300px;
+    margin: 50px auto;
+    padding: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .RegistrationTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .RegistrationInput {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .RegistrationButton {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .RegistrationButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .RegistrationError {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  
+  /* Стили для авторизации */
+  .Auth {
+    width: 300px;
+    margin: 50px auto;
+    padding: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .AuthTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .AuthInput {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .AuthButton {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .AuthButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .AuthError {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  
+  /* Стили для главной страницы */
+  .mainPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .inputMain {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .mainContentPage {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+  }
+  
+  /* Квадрат с категориями */
+  .categories {
+    width: 300px; /* Фиксированная ширина */
+    height: 700px; /* Фиксированная высота */
+    border: 1px solid blue;
+    padding: 20px;
+    box-sizing: border-box; /* Чтобы padding не увеличивал размер */
+    overflow-y: auto; /* Добавляем скролл, если категорий много */
+  }
+  
+  .category {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .category input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  /* Секция товаров */
+  .productsSection {
+    width: calc(100% - 320px); /* Ширина минус ширина блока с категориями */
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+  }
+  
+  .sortDiv {
+    margin-bottom: 20px;
+  }
+  
+  .sortSelect {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Карточки товаров */
+  .products {
+    display: flex;
+    flex-direction: column; /* Карточки в колонку */
+    gap: 20px;
+  }
+  
+  .product {
+    display: flex;
+    width: 100%; /* Фиксированная ширина */
+    height: 150px; /* Фиксированная высота */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    color: inherit;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 10px; /* Добавлен padding */
+  }
+  
+  .product img {
+    width: 150px; /* Фиксированная ширина фото */
+    height: 100%; /* Фото занимает всю высоту */
+    object-fit: cover;
+    margin-right: 20px;
+  }
+  
+  .productInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1; /* Занимает оставшееся пространство */
+  }
+  
+  .productInfo div {
+    margin-bottom: 5px; /* Убираем лишние отступы */
+  }
+  
+  .product button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    align-self: flex-start; /* Выравниваем кнопку по левому краю */
+  }
+  
+  .product button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Стили для футера */
+  .footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    border: 1px solid black;
+  }
+  
+  /* Стили для админ-панели */
+  .adminPanel {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+  
+  .adminChangeBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .adminChangeBlock h5 {
+    font-size: 1.5rem;
+  }
+  
+  .adminInput,
+  .adminSelect {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .adminInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .productItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .productItem div {
+    flex: 1; /* Равномерное распределение пространства */
+    margin-right: 10px;
+  }
+  
+  .editButton,
+  .deleteButton {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px; /* Добавлен отступ между кнопками */
+  }
+  
+  .editButton {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .deleteButton {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  /* Стили для страницы продукта */
+  .productDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .productDetail img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .productInfo {
+    text-align: center;
+  }
+  
+  .productInfo h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+  }
+  
+  .productInfo div {
+    margin-bottom: 5px;
+  }
+  
+  /* Стили для корзины */
+  .cart {
+    padding: 20px;
+  }
+  
+  .cartContent {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .cartProduct {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 60%;
+  }
+  
+  .cartProductPhoto {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+  }
+  
+  .cartProductId,
+  .cartProductName,
+  .cartProductPrice {
+    margin-right: 20px;
+  }
+  
+  .quantityControl {
+    display: flex;
+    align-items: center;
+  }
+  
+  .cartProductBtn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  
+  .cartProductBtn:hover {
+    background-color: #0056b3;
+  }
+  
+  .cartProductCount {
+    margin: 0 10px;
+  }
+  
+  .cartSum {
+    width: 35%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sum {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .createZakaz {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .createZakaz:hover {
+    background-color: #218838;
+  }
+  
+  /* Стили для поисковой строки */
+  .searchInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+  
+  .searchInput:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Стили для лоадера */
+  .loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  .loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #007bff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
