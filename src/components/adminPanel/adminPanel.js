@@ -20,7 +20,7 @@ export const AdminPanel = () => {
   }, [dispatch]);
 
   const handleEditProduct = (productId) => {
-    const productToEdit = products.find(p => p._id === productId); // изменить на _id
+    const productToEdit = products.find(p => p._id === productId); 
     if (productToEdit) {
       setEditingProduct(productToEdit);
     } else {
@@ -29,7 +29,7 @@ export const AdminPanel = () => {
   };
   
   const handleSaveProduct = () => {
-    if (product._id) {  // изменить на _id
+    if (product._id) { 
       dispatch(saveProduct(product));
     } else {
       console.error('ID товара отсутствует');

@@ -1,12 +1,12 @@
-// src/reducers/productsReducer.js
+
 const initialState = {
-  products: [], // Все товары
-  filteredProducts: [], // Отфильтрованные товары
-  sortBy: '', // Параметр сортировки
-  searchQuery: '', // Поисковый запрос
+  products: [], 
+  filteredProducts: [], 
+  sortBy: '', 
+  searchQuery: '', 
 };
 
-// Функция сортировки товаров
+
 export const sortProducts = (products, sortBy) => {
   switch (sortBy) {
     case 'priceAsc':

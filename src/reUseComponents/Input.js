@@ -1,4 +1,4 @@
-// src/reUseComponents/Input.js
+
 import React from 'react';
 
 export const Input = ({ placeholder, className, ...props }) => {

@@ -1,6 +1,6 @@
 const initialState = {
-  items: [], // Список товаров в корзине
-  total: 0, // Итоговая стоимость корзины (число)
+  items: [], 
+  total: 0, 
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -10,22 +10,22 @@ const cartReducer = (state = initialState, action) => {
       const existingItem = state.items.find(item => item.id === newItem.id);
 
       if (existingItem) {
-        // Если товар уже есть в корзине, увеличиваем количество
+       
         const updatedItems = state.items.map(item =>
           item.id === newItem.id ? { ...item, quantity: item.quantity + 1 } : item
         );
         return {
           ...state,
           items: updatedItems,
-          total: state.total + newItem.price, // Увеличиваем итоговую стоимость
+          total: state.total + newItem.price, 
         };
       } else {
-        // Если товара нет, добавляем его в корзину
+        
         const updatedItems = [...state.items, { ...newItem, quantity: 1 }];
         return {
           ...state,
           items: updatedItems,
-          total: state.total + newItem.price, // Увеличиваем итоговую стоимость
+          total: state.total + newItem.price, 
         };
       }
     }
@@ -35,22 +35,22 @@ const cartReducer = (state = initialState, action) => {
       const itemInCart = state.items.find(item => item.id === itemToRemove.id);
 
       if (itemInCart.quantity > 1) {
-        // Если количество товара больше 1, уменьшаем количество
+       
         const updatedItems = state.items.map(item =>
           item.id === itemToRemove.id ? { ...item, quantity: item.quantity - 1 } : item
         );
         return {
           ...state,
           items: updatedItems,
-          total: state.total - itemToRemove.price, // Уменьшаем итоговую стоимость
+          total: state.total - itemToRemove.price, 
         };
       } else {
-        // Если количество товара равно 1, удаляем его из корзины
+        
         const updatedItems = state.items.filter(item => item.id !== itemToRemove.id);
         return {
           ...state,
           items: updatedItems,
-          total: state.total - itemToRemove.price, // Уменьшаем итоговую стоимость
+          total: state.total - itemToRemove.price, 
         };
       }
     }
@@ -63,7 +63,7 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         items: updatedItems,
-        total: state.total + itemToIncrease.price, // Увеличиваем итоговую стоимость
+        total: state.total + itemToIncrease.price,
       };
     }
 
@@ -76,7 +76,7 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         items: updatedItems,
-        total: state.total - itemToDecrease.price, // Уменьшаем итоговую стоимость
+        total: state.total - itemToDecrease.price, 
       };
     }
 

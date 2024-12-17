@@ -1,4 +1,4 @@
-// src/reducers/categoriesReducer.js
+
 const initialState = {
   selectedCategories: [],
 };

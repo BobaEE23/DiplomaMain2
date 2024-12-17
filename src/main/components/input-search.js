@@ -5,12 +5,12 @@ import { setSearchQuery, filterProductsBySearch } from '../../actions';
 
 export const InputSearch = () => {
   const dispatch = useDispatch();
-  const products = useSelector(state => state.products.products); // Получаем все товары
+  const products = useSelector(state => state.products.products); 
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
-    dispatch(setSearchQuery(query)); // Сохраняем поисковый запрос в Redux
-    dispatch(filterProductsBySearch({ products })); // Фильтруем товары
+    dispatch(setSearchQuery(query)); 
+    dispatch(filterProductsBySearch({ products })); 
   };
 
   return (

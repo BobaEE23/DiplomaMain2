@@ -1,4 +1,4 @@
-// src/actions.js
+
 export const setUserRole = (role) => ({
   type: 'SET_USER_ROLE',
   payload: role,
@@ -44,7 +44,7 @@ export const deleteProduct = (productId) => ({
   payload: productId,
 });
 
-// Загрузка товаров
+
 export const fetchProducts = () => {
   return async (dispatch) => {
     try {
@@ -63,7 +63,7 @@ export const fetchProducts = () => {
 export const saveProduct = (product) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${product._id}`, { // изменено на _id
+      const response = await fetch(`http://localhost:5000/api/products/${product._id}`, { 
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -104,30 +104,30 @@ export const removeProduct = (productId) => {
 
 
 
-// Добавление товара в корзину
+
 export const addToCart = (product) => ({
   type: 'ADD_TO_CART',
   payload: product,
 });
 
-// Удаление товара из корзины
+
 export const removeFromCart = (product) => ({
   type: 'REMOVE_FROM_CART',
   payload: product,
 });
 
-// Увеличение количества товара в корзине
+
 export const increaseQuantity = (product) => ({
   type: 'INCREASE_QUANTITY',
   payload: product,
 });
 
-// Уменьшение количества товара в корзине
+
 export const decreaseQuantity = (product) => ({
   type: 'DECREASE_QUANTITY',
   payload: product,
 });
-// src/actions/searchActions.js
+
 export const setSearchQuery = (query) => ({
   type: 'SET_SEARCH_QUERY',
   payload: query,

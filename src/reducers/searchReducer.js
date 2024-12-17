@@ -1,6 +1,6 @@
 const initialState = {
-  searchQuery: '', // Текущий поисковый запрос
-  filteredProducts: [], // Отфильтрованные товары
+  searchQuery: '', 
+  filteredProducts: [], 
 };
 
 const searchReducer = (state = initialState, action) => {
@@ -12,10 +12,10 @@ const searchReducer = (state = initialState, action) => {
         searchQuery: query,
       };
     case 'FILTER_PRODUCTS_BY_SEARCH':
-      const { products } = action.payload; // Передаем все товары для фильтрации
+      const { products } = action.payload; 
       const filteredProducts = products ? products.filter(product =>
         product.name.toLowerCase().includes(state.searchQuery)
-      ) : []; // Проверяем, что products не undefined
+      ) : []; 
       return {
         ...state,
         filteredProducts,
