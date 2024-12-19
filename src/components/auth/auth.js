@@ -37,7 +37,7 @@ export const Auth = () => {
     const { login, password } = data;
 
     try {
-      const response = await fetch('http://localhost:5000/api/users');
+      const response = await fetch('https://diploma-r63e.onrender.com/api/users');
       const users = await response.json();
 
       const user = users.find(user => user.login === login && user.password === password);
