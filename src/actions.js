@@ -49,10 +49,11 @@ export const fetchProducts = () => {
   return async (dispatch) => {
     try {
       const response = await fetch('https://diploma-r63e.onrender.com/api/products');
+      console.log(response)
       if (!response.ok) {
         throw new Error('Ошибка при получении данных');
       }
-      console.log(response)
+      
       const data = await response.json();
       dispatch(setProducts(data));
     } catch (error) {
