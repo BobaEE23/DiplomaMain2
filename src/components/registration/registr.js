@@ -41,7 +41,7 @@ export const Registration = () => {
     const { login, password, email } = data;
 
     try {
-      const response = await fetch('https://diploma-r63e.onrender.com/api/users', {
+      const response = await fetch('/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

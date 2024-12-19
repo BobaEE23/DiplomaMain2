@@ -48,12 +48,10 @@ export const deleteProduct = (productId) => ({
 export const fetchProducts = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products`);
-      
+      const response = await fetch('/api/products'); 
       if (!response.ok) {
         throw new Error('Ошибка при получении данных');
       }
-      
       const data = await response.json();
       dispatch(setProducts(data));
     } catch (error) {
@@ -62,10 +60,11 @@ export const fetchProducts = () => {
   };
 };
 
+
 export const saveProduct = (product) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`https://diploma-r63e.onrender.com/api/products/${product._id}`, { 
+      const response = await fetch(`/api/products/${product._id}`, { 
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -77,6 +76,7 @@ export const saveProduct = (product) => {
           category: product.category,
         }),
       });
+
       if (!response.ok) {
         throw new Error('Ошибка при сохранении данных');
       }
@@ -88,10 +88,11 @@ export const saveProduct = (product) => {
   };
 };
 
+
 export const removeProduct = (productId) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`https://diploma-r63e.onrender.com/api/products/${productId}`, {
+      const response = await fetch(`/api/products/${productId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
