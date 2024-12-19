@@ -38,7 +38,7 @@ export const Cart = () => {
           <div className="cartProducts">
             {filteredCartItems.map(item => (
               <div key={item.id} className="cartProduct">
-                <div className="cartProductPhoto">Photo</div>
+                
                 
                 <h5 className="cartProductName">{item.name}</h5>
                 <div className="quantityControl">
