@@ -1,7 +1,5 @@
-require('dotenv').config(); // Загрузка переменных окружения в начале
-
 const express = require('express');
-const cors = require('cors');
+const cors = require('cors'); // Импорт CORS
 const path = require('path');
 const { connectDB } = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
@@ -10,8 +8,15 @@ const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
+// Настройка CORS для всех источников
+app.use(cors({
+  origin: '*', // Разрешить запросы с любого домена
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Разрешенные HTTP-методы
+  allowedHeaders: ['Content-Type', 'Authorization'], // Разрешенные заголовки
+  credentials: true, // Разрешить отправку куки и авторизационных данных
+}));
+
 // Middleware
-app.use(cors());
 app.use(express.json());
 
 // Подключение к базе данных
