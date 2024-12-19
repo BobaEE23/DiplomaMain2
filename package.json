@@ -2,12 +2,24 @@
   "name": "diploma",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "node backendSrc/server.js",
+    "client": "react-scripts start",
+    "build": "npm install && react-scripts build",
+    "heroku-postbuild": "npm install --prefix backend && npm run build",
+    "dev": "concurrently \"npm run start\" \"npm run client\""
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.2",
@@ -20,11 +32,8 @@
     "web-vitals": "^2.1.4",
     "yup": "^1.4.0"
   },
-  "scripts": {
-    "start": "node backend/server.js",
-    "client": "react-scripts start",
-    "build": "npm install && react-scripts build",
-    "heroku-postbuild": "npm install --prefix backend && npm run build"
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +53,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://diploma-r63e.onrender.com"
+  "proxy": "http://localhost:5000"
 }
