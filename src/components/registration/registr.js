@@ -41,7 +41,7 @@ export const Registration = () => {
     const { login, password, email } = data;
 
     try {
-      const response = await fetch('/api/users', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
