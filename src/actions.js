@@ -1,6 +1,4 @@
 
-
-
 export const setUserRole = (role) => ({
   type: 'SET_USER_ROLE',
   payload: role,
@@ -50,7 +48,7 @@ export const deleteProduct = (productId) => ({
 export const fetchProducts = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL);
+      const response = await fetch('https://diploma-r63e.onrender.com/api/products');
       
       if (!response.ok) {
         throw new Error('Ошибка при получении данных');
