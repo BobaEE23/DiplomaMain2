@@ -52,6 +52,7 @@ export const fetchProducts = () => {
       if (!response.ok) {
         throw new Error('Ошибка при получении данных');
       }
+      console.log(response)
       const data = await response.json();
       dispatch(setProducts(data));
     } catch (error) {
