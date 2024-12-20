@@ -37,12 +37,17 @@ export const Auth = () => {
     const { login, password } = data;
 
     try {
-      const response = await fetch('/api/users');
-      const users = await response.json();
+      // Отправляем запрос на сервер для входа
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ login, password }),
+      });
 
-      const user = users.find(user => user.login === login && user.password === password);
-
-      if (user) {
+      if (response.ok) {
+        const user = await response.json();
         console.log('Авторизация успешна');
         dispatch(setUserRole(user.role_id));
         dispatch(setUserName(user.login));
