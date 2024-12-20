@@ -1,9 +1,8 @@
 
-export const setUserRole = (role) => ({
+export const setUserRole = (role_id) => ({
   type: 'SET_USER_ROLE',
-  payload: role,
+  payload: role_id,
 });
-
 export const setUserName = (name) => ({
   type: 'SET_USER_NAME',
   payload: name,
