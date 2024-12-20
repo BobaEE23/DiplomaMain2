@@ -27,7 +27,7 @@ export const ControlPanel = () => {
       ) : (
         <>
           <span>{user.name}</span>
-          {user.role === 0 ? (
+          {user.role_id === 0 ? (
             <>
               <Link to="/admin">
                 <Icon className="btnIconControlPanel">Панель админа</Icon>
