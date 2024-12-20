@@ -48,7 +48,7 @@ export const Auth = () => {
 
       if (response.ok) {
         const user = await response.json();
-        console.log('Авторизация успешна');
+        console.log('Авторизация успешна' , user.role_id);
         dispatch(setUserRole(user.role_id));
         dispatch(setUserName(user.login));
         dispatch(setUserAuthenticated(true));
