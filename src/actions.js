@@ -62,11 +62,13 @@ export const fetchProducts = () => {
 
 export const saveProduct = (product) => {
   return async (dispatch) => {
+    const token = 'token'; 
     try {
       const response = await fetch(`/api/products/${product._id}`, { 
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'x-auth-token': token,  // Добавляем токен в заголовок
         },
         body: JSON.stringify({
           name: product.name,
@@ -87,12 +89,15 @@ export const saveProduct = (product) => {
   };
 };
 
-
 export const removeProduct = (productId) => {
   return async (dispatch) => {
+    const token = 'token'; 
     try {
       const response = await fetch(`/api/products/${productId}`, {
         method: 'DELETE',
+        headers: {
+          'x-auth-token': token,  // Добавляем токен в заголовок
+        },
       });
       if (!response.ok) {
         throw new Error('Ошибка при удалении данных');

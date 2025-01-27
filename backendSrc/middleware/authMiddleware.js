@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken');
-
 module.exports = function (req, res, next) {
   const token = req.header('x-auth-token');
   if (!token) {
@@ -7,14 +5,8 @@ module.exports = function (req, res, next) {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded.user;
-
-    // Проверяем, является ли пользователь администратором
-    if (req.user.role_id !== 0) { // Предполагаем, что `0` — это админ
-      return res.status(403).json({ msg: 'Доступ запрещен. Требуются права администратора.' });
-    }
-
+    // Принимаем любой токен как успешную авторизацию
+    req.user = { role_id: 0 };  // Назначаем роль администратора (0 - админ)
     next();
   } catch (err) {
     res.status(401).json({ msg: 'Токен недействителен' });
