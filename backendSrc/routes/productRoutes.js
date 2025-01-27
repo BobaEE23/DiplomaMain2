@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
+const authMiddleware = require('../middleware/authMiddleware'); // Подключаем middleware
 
 router.get('/', productController.getAllProducts);
-router.post('/', productController.createProduct);
-router.put('/:id', productController.updateProduct);
-router.delete('/:id', productController.deleteProduct);
+router.post('/', authMiddleware, productController.createProduct); // Проверка прав
+router.put('/:id', authMiddleware, productController.updateProduct); // Проверка прав
+router.delete('/:id', authMiddleware, productController.deleteProduct); // Проверка прав
 
 module.exports = router;
