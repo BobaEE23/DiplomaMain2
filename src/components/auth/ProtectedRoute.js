@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
-  const userRole = useSelector(state => state.user.role);
+  const userRoleId = useSelector(state => state.user.role_id); 
 
   // Если пользователь не авторизован, перенаправляем на страницу входа
   if (!isAuthenticated) {
@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   }
 
   // Если пользователь авторизован, но его роль не совпадает с requiredRole, перенаправляем на 403
-  if (userRole !== requiredRole) {
+  if (userRoleId !== requiredRole) {
     return <Navigate to="/403" />;
   }
 
