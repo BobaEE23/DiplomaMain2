@@ -1,12 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux'; // Импортируем useSelector
+
 
 const ForbiddenPage = () => {
   // Получаем роль пользователя из Redux store
-  const userRole = useSelector(state => state.user.role_id); 
+  
 
-  // Выводим роль пользователя в консоль
-  console.log('Роль пользователя:', userRole);
+ 
 
   return (
     <div>
