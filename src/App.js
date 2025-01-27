@@ -28,7 +28,7 @@ export const App = () => {
         <Route path="/auth" element={<Auth />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:id" element={<Product />} />
-        <Route path="/403" element={<ForbiddenPage />} /> {/* Маршрут для страницы 403 */}
+        <Route path="/403" element={<ForbiddenPage />} /> 
       </Routes>
     </>
   );

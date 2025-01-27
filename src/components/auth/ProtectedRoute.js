@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   }
 
   // Если пользователь авторизован, но его роль не совпадает с requiredRole, перенаправляем на 403
-  if (userRole !== requiredRole) {
+  if (userRole !== 0) {
     return <Navigate to="/403" />;
   }
 
