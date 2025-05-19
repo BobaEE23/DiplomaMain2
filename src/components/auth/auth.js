@@ -77,7 +77,7 @@ export const Auth = () => {
 
   return (
     <div className="Auth">
-      <h2 className="AuthTitle">fff</h2>
+      <h2 className="AuthTitle">Авторизация</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           className="AuthInput AuthLogin"
