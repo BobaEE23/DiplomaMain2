@@ -6,7 +6,9 @@ export const Header = () => {
   return (
     <div className="header">
       <Link to="/">
-        <Icon className="iconHeader">Главная</Icon>
+        <Icon className="iconHeader">
+          <img src="/logo.png" alt="Логотип сайта" />
+        </Icon>
       </Link>
       <ControlPanel />
     </div>
