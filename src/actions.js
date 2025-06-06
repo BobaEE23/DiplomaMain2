@@ -60,34 +60,31 @@ export const fetchProducts = () => {
 };
 
 
-export const saveProduct = (product) => {
-  return async (dispatch) => {
-    const token = 'token'; 
-    try {
-      const response = await fetch(`/api/products/${product._id}`, { 
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth-token': token,  // Добавляем токен в заголовок
-        },
-        body: JSON.stringify({
-          name: product.name,
-          price: product.price,
-          photo: product.photo,
-          category: product.category,
-        }),
-      });
+export const saveProduct = (product) => async (dispatch) => {
+  const isEdit = !!product._id;
 
-      if (!response.ok) {
-        throw new Error('Ошибка при сохранении данных');
-      }
-      const data = await response.json();
-      dispatch(editProduct(data));
-    } catch (error) {
-      console.error('Ошибка при сохранении данных:', error);
-    }
-  };
+  const url = isEdit
+    ? `https://diploma-r63e.onrender.com/products/${product._id}`
+    : `https://diploma-r63e.onrender.com/products`;
+
+  const method = isEdit ? 'PUT' : 'POST';
+
+  const response = await fetch(url, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(product),
+  });
+
+  const data = await response.json();
+
+  dispatch({
+    type: isEdit ? 'EDIT_PRODUCT' : 'ADD_PRODUCT',
+    payload: data,
+  });
 };
+
 
 export const removeProduct = (productId) => {
   return async (dispatch) => {

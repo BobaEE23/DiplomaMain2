@@ -1,26 +1,26 @@
-// app.js
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { connectDB } = require('./config/db'); // Подключение к базе данных
+
+const { connectDB } = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
-// Настройка CORS для всех источников
+// Настройка CORS через middleware (универсально)
 app.use(cors({
   origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
+  exposedHeaders: ['Authorization']
 }));
 
-// Middleware для работы с JSON
+// Middleware для JSON
 app.use(express.json());
 
-// Обслуживание статических файлов из папки public
+// Обслуживание статических файлов
 app.use(express.static(path.resolve(__dirname, '../public')));
 
 // Роуты
@@ -28,9 +28,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 
-// Возвращаем index.html для всех маршрутов, которые не соответствуют API
+// Обработка клиентского SPA
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
-module.exports = app; // Экспортируем объект app
+module.exports = app;
