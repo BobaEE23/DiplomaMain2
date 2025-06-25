@@ -6,7 +6,7 @@ import useProductForm from '../../hooks/useProductForm';
 export const AdminPanel = () => {
   const dispatch = useDispatch();
   const products = useSelector(state => state.adminProducts.products);
-  const [activeTab, setActiveTab] = useState('products'); // 'products' или 'warehouse'
+  const [activeTab, setActiveTab] = useState('products');
 
   const { product, handleInputChange, resetForm, setEditingProduct } = useProductForm({
     id: '',
@@ -14,7 +14,7 @@ export const AdminPanel = () => {
     price: '',
     photo: '',
     category: '',
-    quantity: 0, // Добавляем поле количества
+    quantity: 0,
   });
 
   useEffect(() => {
@@ -24,76 +24,88 @@ export const AdminPanel = () => {
   const handleEditProduct = (productId) => {
     const productToEdit = products.find(p => p._id === productId); 
     if (productToEdit) {
-      setEditingProduct(productToEdit);
-      setActiveTab('products'); // Переключаем на вкладку продуктов при редактировании
+      setEditingProduct({
+        ...productToEdit,
+        id: productToEdit._id // Убедимся, что id установлен
+      });
+      setActiveTab('products');
     } else {
       console.error('Товар не найден');
     }
   };
   
   const handleSaveProduct = async () => {
-    const isExistingProduct = products.some(p =>
-      p.name === product.name &&
-      p.price === product.price &&
-      p.category === product.category
-    );
-
-    if (isExistingProduct) {
-      alert('Товар с такими параметрами уже существует!');
-      return;
-    }
-
     try {
-      const response = await fetch('https://diploma-r63e.onrender.com/api/products', {
-        method: 'POST',
+      const method = product.id ? 'PUT' : 'POST';
+      const url = product.id 
+        ? `https://diploma-r63e.onrender.com/api/products/${product.id}`
+        : 'https://diploma-r63e.onrender.com/api/products';
+
+      const response = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(product),
+        body: JSON.stringify({
+          name: product.name,
+          price: product.price,
+          photo: product.photo,
+          category: product.category,
+          quantity: product.quantity
+        }),
       });
 
       if (!response.ok) {
-        throw new Error('Ошибка при добавлении товара');
+        throw new Error(`Ошибка при ${product.id ? 'обновлении' : 'добавлении'} товара`);
       }
 
-      const newProduct = await response.json();
-      dispatch({ type: 'ADD_PRODUCT', payload: newProduct });
+      const savedProduct = await response.json();
+      
+      if (product.id) {
+        dispatch({ type: 'UPDATE_PRODUCT', payload: savedProduct });
+      } else {
+        dispatch({ type: 'ADD_PRODUCT', payload: savedProduct });
+      }
+      
       resetForm();
     } catch (error) {
       console.error('Ошибка:', error);
-      alert('Ошибка при добавлении товара');
+      alert(`Ошибка при ${product.id ? 'обновлении' : 'добавлении'} товара`);
     }
   };
 
   const handleUpdateQuantity = async (productId, newQuantity) => {
-  try {
-    const response = await fetch(`https://diploma-r63e.onrender.com/api/products/${productId}/quantity`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ quantity: newQuantity }),
-      credentials: 'omit' // Важно при использовании '*'
-    });
+    try {
+      const response = await fetch(`https://diploma-r63e.onrender.com/api/products/${productId}/quantity`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ quantity: Math.max(0, newQuantity) }),
+        credentials: 'omit'
+      });
 
-    if (!response.ok) {
-      throw new Error('Ошибка при обновлении количества');
+      if (!response.ok) throw new Error('Ошибка при обновлении количества');
+
+      const updatedProduct = await response.json();
+      dispatch({ type: 'UPDATE_PRODUCT_QUANTITY', payload: updatedProduct });
+    } catch (error) {
+      console.error('Ошибка:', error);
+      alert('Ошибка при обновлении количества');
     }
-
-    const updatedProduct = await response.json();
-    dispatch({ type: 'UPDATE_PRODUCT_QUANTITY', payload: updatedProduct });
-  } catch (error) {
-    console.error('Ошибка:', error);
-    alert('Ошибка при обновлении количества');
-  }
-};
+  };
 
   const handleAddNewProduct = () => {
     resetForm();
   };
 
   const handleDeleteProduct = (productId) => {
-    dispatch(removeProduct(productId));
+    if (window.confirm('Вы уверены, что хотите удалить этот товар?')) {
+      dispatch(removeProduct(productId));
+      if (product.id === productId) {
+        resetForm();
+      }
+    }
   };
 
   return (
@@ -116,7 +128,7 @@ export const AdminPanel = () => {
 
         {activeTab === 'products' && (
           <div className="adminChangeBlock">
-            <h5>{product._id ? 'Редактирование товара' : 'Добавление нового товара'}</h5>
+            <h5>{product.id ? 'Редактирование товара' : 'Добавление нового товара'}</h5>
             
             <button onClick={handleAddNewProduct}>Новый товар</button>
             
@@ -171,7 +183,7 @@ export const AdminPanel = () => {
             </select>
             
             <button onClick={handleSaveProduct}>
-              {product._id ? 'Сохранить изменения' : 'Добавить товар'}
+              {product.id ? 'Сохранить изменения' : 'Добавить товар'}
             </button>
           </div>
         )}
@@ -186,30 +198,47 @@ export const AdminPanel = () => {
         )}
         
         <div className="adminInfo">
-          {activeTab === 'products' && products.map(product => (
-            <div key={product._id} className="productItem">
-              <img src={product.photo} alt={product.name} width="50" />
-              <span className="productName">{product.name}</span>
-              <span className="productPrice">{product.price} руб.</span>
-              <span className="productCategory">{product.category}</span>
-              <button onClick={() => handleEditProduct(product._id)}>Редактировать</button>
-              <button onClick={() => handleDeleteProduct(product._id)}>Удалить</button>
+          {activeTab === 'products' && products.map(p => (
+            <div key={p._id} className="productItem">
+              <img src={p.photo} alt={p.name} width="50" />
+              <span className="productName">{p.name}</span>
+              <span className="productPrice">{p.price} руб.</span>
+              <span className="productCategory">{p.category}</span>
+              <button 
+                className="editButton"
+                onClick={() => handleEditProduct(p._id)}
+              >
+                Редактировать
+              </button>
+              <button 
+                className="deleteButton"
+                onClick={() => handleDeleteProduct(p._id)}
+              >
+                Удалить
+              </button>
             </div>
           ))}
 
-          {activeTab === 'warehouse' && products.map(product => (
-            <div key={product._id} className="warehouseItem">
-              <img src={product.photo} alt={product.name} width="50" />
-              <span className="productName">{product.name}</span>
+          {activeTab === 'warehouse' && products.map(p => (
+            <div key={p._id} className="warehouseItem">
+              <img src={p.photo} alt={p.name} width="50" />
+              <span className="productName">{p.name}</span>
               <div className="quantityControls">
-                <button onClick={() => handleUpdateQuantity(product._id, (product.quantity || 0) - 1)}>-</button>
-                <span className="productQuantity">{product.quantity || 0}</span>
-                <button onClick={() => handleUpdateQuantity(product._id, (product.quantity || 0) + 1)}>+</button>
+                <button 
+                  onClick={() => handleUpdateQuantity(p._id, (p.quantity || 0) - 1)}
+                  disabled={p.quantity <= 0}
+                >
+                  -
+                </button>
+                <span className="productQuantity">{p.quantity || 0}</span>
+                <button onClick={() => handleUpdateQuantity(p._id, (p.quantity || 0) + 1)}>
+                  +
+                </button>
               </div>
               <input
                 type="number"
-                value={product.quantity || 0}
-                onChange={(e) => handleUpdateQuantity(product._id, parseInt(e.target.value) || 0)}
+                value={p.quantity || 0}
+                onChange={(e) => handleUpdateQuantity(p._id, parseInt(e.target.value) || 0)}
                 min="0"
                 className="quantityInput"
               />
